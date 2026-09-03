@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Youth Shelter Resources | South &amp; Beyond</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --navy: #1a2744;
+    --navy-light: #253460;
+    --gold: #c9a84c;
+    --teal: #3a7d8c;
+    --teal-light: #e6f2f4;
+    --white: #f7f8fa;
+    --card-bg: #ffffff;
+    --text: #1c1c1e;
+    --muted: #5a5f72;
+    --border: #dde1eb;
+    --red: #b03a2e;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--white);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--navy);
+    color: #fff;
+    padding: 2.5rem 1.5rem 2rem;
+  }
+  header .inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  header .label {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  header h1 {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: clamp(1.6rem, 4vw, 2.4rem);
+    font-weight: normal;
+    line-height: 1.25;
+    color: #fff;
+    max-width: 600px;
+  }
+
+  /* HOTLINE BANNER */
+  .hotline-bar {
+    background: var(--red);
+    color: #fff;
+    padding: 0.9rem 1.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .hotline-bar a {
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+  }
+  .hotline-bar a:hover { border-bottom-color: #fff; }
+
+  /* OPENING MESSAGE */
+  .opening {
+    background: var(--navy-light);
+    color: #dde4f0;
+    padding: 2rem 1.5rem;
+  }
+  .opening .inner {
+    max-width: 820px;
+    margin: 0 auto;
+  }
+  .opening h2 {
+    font-family: Georgia, serif;
+    font-size: 0.95rem;
+    font-weight: normal;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  .opening p {
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 0.97rem;
+    line-height: 1.75;
+    max-width: 72ch;
+  }
+  .opening p + p { margin-top: 0.85rem; }
+
+  /* MAIN */
+  main {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.25rem 4rem;
+  }
+
+  /* CRISIS RESOURCES */
+  .crisis-section {
+    margin-bottom: 2.5rem;
+  }
+  .section-head {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
+  .section-head h2 {
+    font-family: Georgia, serif;
+    font-size: 1.15rem;
+    font-weight: normal;
+    color: var(--navy);
+  }
+  .section-head .line {
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  .crisis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+  .crisis-card {
+    background: var(--teal-light);
+    border-left: 4px solid var(--teal);
+    border-radius: 0 6px 6px 0;
+    padding: 1.1rem 1.25rem;
+  }
+  .crisis-card h3 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--teal);
+    margin-bottom: 0.4rem;
+  }
+  .crisis-card p { font-size: 0.875rem; color: var(--text); margin-bottom: 0.5rem; }
+  .crisis-card a.phone {
+    display: inline-block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .crisis-card a.phone:hover { color: var(--teal); }
+
+  /* REGION SECTIONS */
+  .region {
+    margin-bottom: 2.75rem;
+  }
+  .region-label {
+    display: inline-block;
+    background: var(--navy);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+  }
+
+  .shelter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+    gap: 1rem;
+  }
+
+  .shelter-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .shelter-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.3;
+  }
+  .shelter-card .ages {
+    display: inline-block;
+    background: var(--gold);
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.2rem 0.55rem;
+    border-radius: 3px;
+    align-self: flex-start;
+  }
+  .shelter-card .location {
+    font-size: 0.82rem;
+    color: var(--muted);
+  }
+  .shelter-card .services {
+    font-size: 0.85rem;
+    color: var(--text);
+    line-height: 1.5;
+  }
+  .shelter-card .contact-group {
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .shelter-card a.phone {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--navy);
+    text-decoration: none;
+  }
+  .shelter-card a.phone:hover { color: var(--teal); }
+  .shelter-card .address {
+    font-size: 0.78rem;
+    color: var(--muted);
+  }
+  .shelter-card .tag {
+    display: inline-block;
+    background: #eaf5f7;
+    color: var(--teal);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.15rem 0.45rem;
+    border-radius: 3px;
+    align-self: flex-start;
+  }
+
+  /* FIND HELP */
+  .find-help {
+    background: var(--navy);
+    border-radius: 8px;
+    color: #dde4f0;
+    padding: 1.75rem 1.5rem;
+    margin-top: 1rem;
+  }
+  .find-help h2 {
+    font-family: Georgia, serif;
+    font-weight: normal;
+    font-size: 1.1rem;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+  .find-help p { font-size: 0.9rem; line-height: 1.6; margin-bottom: 0.5rem; }
+  .find-help a { color: #a8d4dd; }
+  .find-help a:hover { color: #fff; }
+
+  /* FOOTER */
+  footer {
+    background: var(--navy);
+    color: #7a879f;
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.8rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    header { padding: 2rem 1rem 1.5rem; }
+    main { padding: 1.5rem 1rem 3rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="inner">
+    <div class="label">Resource Guide</div>
+    <h1>Youth Shelter &amp; Housing Resources<br>Ages 16&ndash;24</h1>
+  </div>
+</header>
+
+<div class="hotline-bar">
+  Need immediate help? Call or text <a href="tel:18007862929">1-800-RUNAWAY (1-800-786-2929)</a> &mdash; 24/7, free, confidential.
+</div>
+
+<div class="opening">
+  <div class="inner">
+    <h2>About this resource</h2>
+    <p>
+      Unfortunately, due to ageism, adultism, and ageist laws, there still aren't really youth shelters in the U.S., and those that used to exist during documentaries like "Children of the Night" and LA street kid documentaries have been shut down. People feel kids should just go "back home," and other youth shelters are for foster kids or foster homeless shelter placements for the kids they don't throw on the streets or in a hotel when they have no placement, or are too old for people to want to foster.
+    </p>
+    <p>
+      Many youth shelters want ID, which is harder to get for legal and other reasons if you're young, and they can't harbor runaways or missing people knowingly -- which is bad because many kicked-out people, runaways, and abuse escapees are reported missing as a smear campaign or blackmail.
+    </p>
+    <p>
+      For unaccompanied homeless youth who have nowhere to go and are trying to run as encampment sweeps and imprisonment get worse -- even for those who legally can't go to shelters and are too young for the "help" that doesn't exist, and for those that were told that there's help out there but they have to hold onto dear life until 18, just to find out "help" still doesn't exist and they're now too old or still too young for everything, and will still be discriminated against for having no parents.
+    </p>
+  </div>
+</div>
+
+<main>
+
+  <!-- CRISIS HOTLINES -->
+  <section class="crisis-section">
+    <div class="section-head">
+      <h2>24/7 Crisis Hotlines &mdash; Free</h2>
+      <span class="line"></span>
+    </div>
+    <div class="crisis-grid">
+      <div class="crisis-card">
+        <h3>National Runaway Safeline</h3>
+        <p>Call, text, or chat. Can coordinate free bus travel to a safe shelter via the Home Free program.</p>
+        <a class="phone" href="tel:18007862929">1-800-786-2929</a>
+      </div>
+      <div class="crisis-card">
+        <h3>The Trevor Project</h3>
+        <p>For LGBTQ+ youth. Call, or text START to 678-678.</p>
+        <a class="phone" href="tel:18664887386">1-866-488-7386</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOUISIANA -->
+  <section class="region">
+    <div class="section-head">
+      <h2>Louisiana</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+
+      <div class="shelter-card">
+        <h3>Covenant House New Orleans</h3>
+        <span class="ages">Ages 16&ndash;22</span>
+        <div class="location">New Orleans, LA</div>
+        <p class="services">Open 24/7/365. Immediate housing, healthcare, job training, and legal advocacy.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:15045841111">(504) 584-1111</a>
+          <div class="address">611 Rampart St, New Orleans, LA 70112</div>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>Youth Oasis</h3>
+        <span class="ages">Ages 16&ndash;25</span>
+        <div class="location">Baton Rouge, LA</div>
+        <p class="services">Emergency shelter (18&ndash;24), Diversity House for LGBTQ+ youth (16&ndash;21), and a Maternity Group Home.</p>
+        <span class="tag">LGBTQ+ affirming</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:12253436300">(225) 343-6300</a>
+          <div class="address">260 South Acadian Thruway, Baton Rouge, LA 70806</div>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>Christopher Youth Center</h3>
+        <span class="ages">Ages 11&ndash;24</span>
+        <div class="location">Monroe, LA</div>
+        <p class="services">Emergency shelter for ages 11&ndash;17. Transitional living and rapid rehousing for ages 18&ndash;24. 24/7 crisis line.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:13183228000">(318) 322-8000</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- GEORGIA -->
+  <section class="region">
+    <div class="section-head">
+      <h2>Georgia</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+
+      <div class="shelter-card">
+        <h3>Covenant House Georgia</h3>
+        <span class="ages">Ages 16&ndash;24</span>
+        <div class="location">Atlanta, GA</div>
+        <p class="services">Emergency shelter, drop-in center (meals, showers, laundry), street outreach, GED and workforce prep.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:14045890163">(404) 589-0163</a>
+          <div class="address">1559 Johnson Rd NW, Atlanta, GA 30318</div>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>Lost-N-Found Youth</h3>
+        <span class="ages">Ages 18&ndash;25</span>
+        <div class="location">Atlanta, GA</div>
+        <p class="services">Focuses on LGBTQ+ youth but welcomes all. 24/7 crisis hotline, drop-in center, and transitional housing.</p>
+        <span class="tag">LGBTQ+ focused</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:16788567825">(678) 856-7825</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TEXAS -->
+  <section class="region">
+    <div class="section-head">
+      <h2>Texas</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+
+      <div class="shelter-card">
+        <h3>Thrive Youth Center</h3>
+        <span class="ages">Ages 18&ndash;24</span>
+        <div class="location">San Antonio, TX</div>
+        <p class="services">Safe space for LGBTQ+ young adults. Emergency shelter beds, supportive apartments, and mental health counseling. Located on the Haven for Hope campus.</p>
+        <span class="tag">LGBTQ+ affirming</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:12102122935">(210) 212-2935</a>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>Montrose Grace Place / Asia's House</h3>
+        <span class="ages">Ages 13&ndash;24</span>
+        <div class="location">Houston, TX</div>
+        <p class="services">Houston's first affirming emergency shelter for youth. Drop-in center for ages 13&ndash;24, emergency shelter for ages 15&ndash;17. Family-style meals, trauma-informed lodging, case management.</p>
+        <span class="tag">LGBTQ+ affirming</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:17134891383">(713) 489-1383</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FLORIDA -->
+  <section class="region">
+    <div class="section-head">
+      <h2>Florida</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+
+      <div class="shelter-card">
+        <h3>Zebra Youth</h3>
+        <span class="ages">Ages 18&ndash;24</span>
+        <div class="location">Orlando, FL</div>
+        <p class="services">Affirming transitional housing units, case management, and mental health care.</p>
+        <span class="tag">LGBTQ+ affirming</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:14072281446">(407) 228-1446</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- UTAH (additional) -->
+  <section class="region">
+    <div class="section-head">
+      <h2>Utah</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+
+      <div class="shelter-card">
+        <h3>Homeless Youth Walk-In Program</h3>
+        <span class="ages">Up to age 17</span>
+        <div class="location">South Salt Lake, UT</div>
+        <p class="services">Free overnight shelter, food, laundry, showers, and crisis counseling. Open 24/7. No ID required.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:13854684470">(385) 468-4470</a>
+          <div class="address">177 West Price Ave (3610 South), South Salt Lake, UT 84115</div>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>VOA Utah &mdash; Youth Resource Center</h3>
+        <span class="ages">Ages 15&ndash;22</span>
+        <div class="location">Salt Lake City, UT</div>
+        <p class="services">50-bed overnight shelter, three hot meals daily, showers, laundry, on-site medical and dental care, legal aid, and housing case management. Drop-in 8:30 AM&ndash;7:30 PM; shelter overnight.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:18013640744">(801) 364-0744</a>
+          <div class="address">888 S 400 W, Salt Lake City, UT 84101</div>
+        </div>
+      </div>
+
+      <div class="shelter-card">
+        <h3>Milestone Transitional Living Program</h3>
+        <span class="ages">Ages 18&ndash;21</span>
+        <div class="location">West Jordan, UT</div>
+        <p class="services">Longer-term help for those past emergency needs. Temporary and short-term housing with a focus on career building, job training, and self-sufficiency.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:13854684610">(385) 468-4610</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FIND HELP ANYWHERE -->
+  <div class="find-help">
+    <h2>Find help in your area</h2>
+    <p>If you're not near one of the cities above, these directories can help locate the nearest options by ZIP code:</p>
+    <p>
+      <a href="https://truecolorsunited.org" target="_blank" rel="noopener">True Colors United directory</a> &mdash;
+      <a href="https://findhelp.org" target="_blank" rel="noopener">FindHelp.org</a> &mdash;
+      <a href="https://www.1800runaway.org" target="_blank" rel="noopener">1800runaway.org</a>
+    </p>
+    <p style="margin-top:0.75rem; font-size:0.82rem; color:#9aacc0;">
+      Always call ahead to verify bed availability, intake hours, and age requirements before traveling to any location.
+    </p>
+  </div>
+
+</main>
+
+<footer>
+  Resource information compiled for community use. Verify details directly with each organization, as hours and availability change.
+</footer>
+
+</body>
+</html>
