@@ -104,6 +104,92 @@
     padding: 2rem 1.25rem 4rem;
   }
 
+  /* ── STATE FILTER ── */
+  .filter-bar {
+    background: var(--navy);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .filter-bar label {
+    color: var(--gold);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .filter-controls {
+    display: flex;
+    gap: 0.75rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  #state-search {
+    flex: 1;
+    min-width: 160px;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 5px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  #state-search::placeholder { color: rgba(255,255,255,0.4); }
+  #state-search:focus { border-color: var(--gold); }
+
+  #state-select {
+    flex: 1;
+    min-width: 160px;
+    padding: 0.55rem 0.85rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 5px;
+    background: rgba(255,255,255,0.08);
+    color: #fff;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color 0.2s;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23c9a84c' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.85rem center;
+    background-size: 10px;
+    padding-right: 2rem;
+  }
+  #state-select option { background: var(--navy); color: #fff; }
+  #state-select:focus { border-color: var(--gold); }
+
+  #clear-filter {
+    padding: 0.55rem 1rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 5px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  #clear-filter:hover { border-color: var(--gold); color: var(--gold); }
+
+  .no-results {
+    display: none;
+    text-align: center;
+    padding: 2.5rem 1rem;
+    color: var(--muted);
+    font-family: Georgia, serif;
+    font-size: 1rem;
+  }
+  .no-results.visible { display: block; }
+
   /* CRISIS RESOURCES */
   .crisis-section {
     margin-bottom: 2.5rem;
@@ -119,6 +205,7 @@
     font-size: 1.15rem;
     font-weight: normal;
     color: var(--navy);
+    white-space: nowrap;
   }
   .section-head .line {
     flex: 1;
@@ -272,6 +359,9 @@
   @media (max-width: 600px) {
     header { padding: 2rem 1rem 1.5rem; }
     main { padding: 1.5rem 1rem 3rem; }
+    .filter-bar { flex-direction: column; align-items: stretch; }
+    .filter-controls { flex-direction: column; }
+    #state-search, #state-select { min-width: unset; width: 100%; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
@@ -326,14 +416,91 @@
     </div>
   </section>
 
+  <!-- STATE FILTER -->
+  <div class="filter-bar" role="search" aria-label="Filter resources by state">
+    <label for="state-search">Find by state</label>
+    <div class="filter-controls">
+      <input
+        type="text"
+        id="state-search"
+        placeholder="Type a state name or abbreviation (e.g. CA, Texas)"
+        autocomplete="off"
+        spellcheck="false"
+        aria-label="Search by state name or abbreviation"
+      >
+      <select id="state-select" aria-label="Or pick a state from the list">
+        <option value="">— or pick a state —</option>
+        <option value="florida">Florida (FL)</option>
+        <option value="georgia">Georgia (GA)</option>
+        <option value="louisiana">Louisiana (LA)</option>
+        <option value="texas">Texas (TX)</option>
+        <option value="utah">Utah (UT)</option>
+      </select>
+      <button id="clear-filter" type="button" aria-label="Show all states">Show all</button>
+    </div>
+  </div>
+
+  <div class="no-results" id="no-results" role="status" aria-live="polite">
+    No resources found for that state yet. Try searching <a href="https://findhelp.org" target="_blank" rel="noopener">FindHelp.org</a> or calling <a href="tel:18007862929">1-800-RUNAWAY</a>.
+  </div>
+
+  <!-- FLORIDA -->
+  <section class="region" data-state="florida" data-abbr="fl">
+    <div class="section-head">
+      <h2>Florida</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+      <div class="shelter-card">
+        <h3>Zebra Youth</h3>
+        <span class="ages">Ages 18&ndash;24</span>
+        <div class="location">Orlando, FL</div>
+        <p class="services">Affirming transitional housing units, case management, and mental health care.</p>
+        <span class="tag">LGBTQ+ affirming</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:14072281446">(407) 228-1446</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GEORGIA -->
+  <section class="region" data-state="georgia" data-abbr="ga">
+    <div class="section-head">
+      <h2>Georgia</h2>
+      <span class="line"></span>
+    </div>
+    <div class="shelter-grid">
+      <div class="shelter-card">
+        <h3>Covenant House Georgia</h3>
+        <span class="ages">Ages 16&ndash;24</span>
+        <div class="location">Atlanta, GA</div>
+        <p class="services">Emergency shelter, drop-in center (meals, showers, laundry), street outreach, GED and workforce prep.</p>
+        <div class="contact-group">
+          <a class="phone" href="tel:14045890163">(404) 589-0163</a>
+          <div class="address">1559 Johnson Rd NW, Atlanta, GA 30318</div>
+        </div>
+      </div>
+      <div class="shelter-card">
+        <h3>Lost-N-Found Youth</h3>
+        <span class="ages">Ages 18&ndash;25</span>
+        <div class="location">Atlanta, GA</div>
+        <p class="services">Focuses on LGBTQ+ youth but welcomes all. 24/7 crisis hotline, drop-in center, and transitional housing.</p>
+        <span class="tag">LGBTQ+ focused</span>
+        <div class="contact-group">
+          <a class="phone" href="tel:16788567825">(678) 856-7825</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- LOUISIANA -->
-  <section class="region">
+  <section class="region" data-state="louisiana" data-abbr="la">
     <div class="section-head">
       <h2>Louisiana</h2>
       <span class="line"></span>
     </div>
     <div class="shelter-grid">
-
       <div class="shelter-card">
         <h3>Covenant House New Orleans</h3>
         <span class="ages">Ages 16&ndash;22</span>
@@ -344,7 +511,6 @@
           <div class="address">611 Rampart St, New Orleans, LA 70112</div>
         </div>
       </div>
-
       <div class="shelter-card">
         <h3>Youth Oasis</h3>
         <span class="ages">Ages 16&ndash;25</span>
@@ -356,7 +522,6 @@
           <div class="address">260 South Acadian Thruway, Baton Rouge, LA 70806</div>
         </div>
       </div>
-
       <div class="shelter-card">
         <h3>Christopher Youth Center</h3>
         <span class="ages">Ages 11&ndash;24</span>
@@ -366,51 +531,16 @@
           <a class="phone" href="tel:13183228000">(318) 322-8000</a>
         </div>
       </div>
-
-    </div>
-  </section>
-
-  <!-- GEORGIA -->
-  <section class="region">
-    <div class="section-head">
-      <h2>Georgia</h2>
-      <span class="line"></span>
-    </div>
-    <div class="shelter-grid">
-
-      <div class="shelter-card">
-        <h3>Covenant House Georgia</h3>
-        <span class="ages">Ages 16&ndash;24</span>
-        <div class="location">Atlanta, GA</div>
-        <p class="services">Emergency shelter, drop-in center (meals, showers, laundry), street outreach, GED and workforce prep.</p>
-        <div class="contact-group">
-          <a class="phone" href="tel:14045890163">(404) 589-0163</a>
-          <div class="address">1559 Johnson Rd NW, Atlanta, GA 30318</div>
-        </div>
-      </div>
-
-      <div class="shelter-card">
-        <h3>Lost-N-Found Youth</h3>
-        <span class="ages">Ages 18&ndash;25</span>
-        <div class="location">Atlanta, GA</div>
-        <p class="services">Focuses on LGBTQ+ youth but welcomes all. 24/7 crisis hotline, drop-in center, and transitional housing.</p>
-        <span class="tag">LGBTQ+ focused</span>
-        <div class="contact-group">
-          <a class="phone" href="tel:16788567825">(678) 856-7825</a>
-        </div>
-      </div>
-
     </div>
   </section>
 
   <!-- TEXAS -->
-  <section class="region">
+  <section class="region" data-state="texas" data-abbr="tx">
     <div class="section-head">
       <h2>Texas</h2>
       <span class="line"></span>
     </div>
     <div class="shelter-grid">
-
       <div class="shelter-card">
         <h3>Thrive Youth Center</h3>
         <span class="ages">Ages 18&ndash;24</span>
@@ -421,7 +551,6 @@
           <a class="phone" href="tel:12102122935">(210) 212-2935</a>
         </div>
       </div>
-
       <div class="shelter-card">
         <h3>Montrose Grace Place / Asia's House</h3>
         <span class="ages">Ages 13&ndash;24</span>
@@ -432,40 +561,16 @@
           <a class="phone" href="tel:17134891383">(713) 489-1383</a>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- FLORIDA -->
-  <section class="region">
-    <div class="section-head">
-      <h2>Florida</h2>
-      <span class="line"></span>
-    </div>
-    <div class="shelter-grid">
-
-      <div class="shelter-card">
-        <h3>Zebra Youth</h3>
-        <span class="ages">Ages 18&ndash;24</span>
-        <div class="location">Orlando, FL</div>
-        <p class="services">Affirming transitional housing units, case management, and mental health care.</p>
-        <span class="tag">LGBTQ+ affirming</span>
-        <div class="contact-group">
-          <a class="phone" href="tel:14072281446">(407) 228-1446</a>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- UTAH (additional) -->
-  <section class="region">
+  <!-- UTAH -->
+  <section class="region" data-state="utah" data-abbr="ut">
     <div class="section-head">
       <h2>Utah</h2>
       <span class="line"></span>
     </div>
     <div class="shelter-grid">
-
       <div class="shelter-card">
         <h3>Homeless Youth Walk-In Program</h3>
         <span class="ages">Up to age 17</span>
@@ -476,7 +581,6 @@
           <div class="address">177 West Price Ave (3610 South), South Salt Lake, UT 84115</div>
         </div>
       </div>
-
       <div class="shelter-card">
         <h3>VOA Utah &mdash; Youth Resource Center</h3>
         <span class="ages">Ages 15&ndash;22</span>
@@ -487,7 +591,6 @@
           <div class="address">888 S 400 W, Salt Lake City, UT 84101</div>
         </div>
       </div>
-
       <div class="shelter-card">
         <h3>Milestone Transitional Living Program</h3>
         <span class="ages">Ages 18&ndash;21</span>
@@ -497,7 +600,6 @@
           <a class="phone" href="tel:13854684610">(385) 468-4610</a>
         </div>
       </div>
-
     </div>
   </section>
 
@@ -520,6 +622,49 @@
 <footer>
   Resource information compiled for community use. Verify details directly with each organization, as hours and availability change.
 </footer>
+
+<script>
+  const searchInput  = document.getElementById('state-search');
+  const stateSelect  = document.getElementById('state-select');
+  const clearBtn     = document.getElementById('clear-filter');
+  const noResults    = document.getElementById('no-results');
+  const regions      = Array.from(document.querySelectorAll('.region'));
+
+  function normalize(str) {
+    return str.trim().toLowerCase();
+  }
+
+  function filter(query) {
+    query = normalize(query);
+    let visible = 0;
+
+    regions.forEach(function(section) {
+      const stateName = normalize(section.dataset.state || '');
+      const stateAbbr = normalize(section.dataset.abbr || '');
+      const match = !query || stateName.includes(query) || stateAbbr === query;
+      section.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+
+    noResults.classList.toggle('visible', query !== '' && visible === 0);
+  }
+
+  searchInput.addEventListener('input', function() {
+    stateSelect.value = '';
+    filter(searchInput.value);
+  });
+
+  stateSelect.addEventListener('change', function() {
+    searchInput.value = '';
+    filter(stateSelect.value);
+  });
+
+  clearBtn.addEventListener('click', function() {
+    searchInput.value = '';
+    stateSelect.value = '';
+    filter('');
+  });
+</script>
 
 </body>
 </html>
