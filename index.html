@@ -19,6 +19,9 @@
     --muted: #5a5f72;
     --border: #dde1eb;
     --red: #b03a2e;
+    --amber: #7a4a00;
+    --amber-light: #fff7e6;
+    --amber-border: #d4922a;
   }
 
   body {
@@ -327,6 +330,36 @@
     align-self: flex-start;
   }
 
+  /* POLICY WARNING BANNER */
+  .policy-warning {
+    background: var(--amber-light);
+    border: 1px solid var(--amber-border);
+    border-left: 4px solid var(--amber-border);
+    border-radius: 0 6px 6px 0;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    grid-column: 1 / -1;
+  }
+  .policy-warning .warn-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--amber);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .policy-warning .warn-head svg {
+    flex-shrink: 0;
+  }
+  .policy-warning p {
+    font-size: 0.85rem;
+    color: #5a3a00;
+    line-height: 1.6;
+  }
+
   /* FIND HELP */
   .find-help {
     background: var(--navy);
@@ -571,6 +604,22 @@
       <span class="line"></span>
     </div>
     <div class="shelter-grid">
+
+      <!-- ⚠️ POLICY WARNING: Under-18 housing discontinued -->
+      <div class="policy-warning">
+        <div class="warn-head">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M8 1.5L14.5 13H1.5L8 1.5Z" stroke="#d4922a" stroke-width="1.5" fill="none"/>
+            <line x1="8" y1="6" x2="8" y2="9.5" stroke="#d4922a" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="8" cy="11.25" r="0.75" fill="#d4922a"/>
+          </svg>
+          Policy Change &mdash; Under-18 Housing Discontinued in Utah
+        </div>
+        <p>
+          American Volunteer Youth Resource Center (Utah) has <strong>stopped housing anyone under 18</strong>, citing the difference in legal requirements between housing minors vs. adults &mdash; likely driven by liability concerns, mandatory reporting obligations, and worries about mixing minors and adults in the same facility. The end result: kids under 18 are being turned away and left outside in one of the coldest states in the country. This is a real and ongoing gap. If you or someone you know is under 18 in Utah, call <a href="tel:18007862929" style="color:#7a4a00; font-weight:700;">1-800-RUNAWAY</a> first &mdash; they can help locate the nearest option and may be able to coordinate travel through the Home Free program.
+        </p>
+      </div>
+
       <div class="shelter-card">
         <h3>Homeless Youth Walk-In Program</h3>
         <span class="ages">Up to age 17</span>
